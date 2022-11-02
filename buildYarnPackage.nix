@@ -101,6 +101,7 @@ in stdenv.mkDerivation (rec {
     runHook postInstall
   '';
 } // commonEnv // removeAttrs args [ "integreties" "packageOverrides" ] // {
-  buildInputs = [ nodejs makeWrapper yarnWrapper ] ++ buildInputs;
+  buildInputs = [ nodejs yarnWrapper ] ++ buildInputs;
+  nativeBuildInputs = [ makeWrapper ]; # https://github.com/NixOS/nixpkgs/issues/188296#issuecomment-1229577424
   yarnFlags = [ "--offline" "--frozen-lockfile" "--non-interactive" ] ++ yarnFlags;
 })
